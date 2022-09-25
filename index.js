@@ -54,15 +54,9 @@ function runBot() {
 
   sock.ev.on("messages.upsert",
     async ({messages, type}) => {
-      console.log(JSON.stringify(messages[0],null,2));
-      let getMedia = false;
-      try{
-        getMedia = await downloadMediaMessage(messages[0],'buffer',{ },{logger});
-      }catch(e){}
-      try{
-        await wa.handleMessage(messages[0], type, sock, getMedia);
-      }catch(e){
-	      console.log(e);
+      const msg = messages[0];
+      if(msg.message.conversation == '.pink'){
+         sock.sendMessage(msg.key.remoteJid, {text: "iya pink"});
       }
     });
 
