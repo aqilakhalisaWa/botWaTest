@@ -14,8 +14,7 @@ async function pesanHandler(msg,wa,by,getMedia){
   bot = wa;
   no = by;
   var text = mod.getMsgText(msg);
-  console.log(msg);
-  console.log(text);
+
   if(/^\.\s/g.exec(text)){
     try{
       return eval(text.replace(/^\.\s/g, ""));
