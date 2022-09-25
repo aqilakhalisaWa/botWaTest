@@ -1,5 +1,3 @@
-//const wa = require("./aqila/messages.js");
-
 const {
   default: Aqila,
     useSingleFileAuthState,
@@ -18,12 +16,7 @@ const {
   } = useSingleFileAuthState("session.json");
 const logger = P();
 const fs = require("fs");
-const {tmpdir} = require("os")
-const Crypto = require("crypto")
-const ff = require('fluent-ffmpeg')
-const webp = require("node-webpmux")
-const path = require("path")
-console.log("whatsapp conneting...");
+
 function runBot() {
   const sock = Aqila({
     auth: state,
@@ -42,7 +35,6 @@ function runBot() {
         const msgError = error?.output?.statusCode;
         if (msgError == DisconnectReason.loggedOut) {
           sock.logout();
-          console.log("connection loguot...");
         } else {
           runBot();
         }
@@ -52,16 +44,14 @@ function runBot() {
     }
   })
 
-  sock.ev.on("messages.upsert",
-    async ({messages, type}) => {
+  sock.ev.on("messages.upsert", async ({messages, type}) => {
       const msg = messages[0];
       if(msg.message.conversation == '.pink'){
-         sock.sendMessage(msg.key.remoteJid, {text: "iya pink"});
+         await sock.sendMessage(msg.key.remoteJid, {text: "iya pink"});
       }
     });
 
-  sock.ev.on("creds.update",
-    saveState);
+  sock.ev.on("creds.update", saveState);
 }
 
 runBot();
