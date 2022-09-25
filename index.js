@@ -1,4 +1,4 @@
-const wa = require("./aqila/messages.js");
+//const wa = require("./aqila/messages.js");
 
 const {
   default: Aqila,
